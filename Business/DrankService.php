@@ -13,8 +13,15 @@ Class DrankService{
         return $lijst;
    }
     public function checkVoorraad($type){
-        console.log("checkvoorraad");
+        //console.log("checkvoorraad");
         $gDAO = new DrankDAO();
-        $gDAO->haalvoorraad($type);
+        $voorraad=$gDAO->haalvoorraad($type);
+        return $voorraad;
+    }
+    public function haalPrijs($type){
+        //console.log("checkvoorraad");
+        $gDAO = new DrankDAO();
+        $prijs=$gDAO->haalprijs($type);
+        return $prijs;
     }
 }
