@@ -172,7 +172,11 @@ class DrankDAO {
         $stmt = $dbh->prepare($sql);
        $stmt->execute(array(':type' => $type));
        $rij = $stmt->fetch(PDO::FETCH_ASSOC);
-       
+       $voorraad=$rij['voorraad'];
+       $voorraad=$voorraad-1;
+       $sql = "update drank set voorraad= :voorraad where type= :type";
+       $stmt = $dbh->prepare($sql);
+       $stmt->execute(array(':voorraad'=> $voorraad, ':type' => $type));
        //echo print_r($resultSet);
        //echo "totaal = ".count($resultSet);
         $dbh = null;
@@ -182,7 +186,7 @@ class DrankDAO {
         throw new FrisDrankException();
        } else {
 //       
-           $voorraad=$rij['voorraad'];
+           
            
          return $voorraad;
         }

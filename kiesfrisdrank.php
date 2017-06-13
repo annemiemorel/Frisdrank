@@ -11,7 +11,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "process") {
         $gSvc = new DrankService();
         $_SESSION['voorraad']=$gSvc->checkVoorraad($type);
         $_SESSION['prijs']=$gSvc->haalPrijs($type);
-        echo "voorraad = ".$_SESSION['voorraad'];
+        //echo "voorraad = ".$_SESSION['voorraad'];
+        $_SESSION['betaald']=0;
         header("location: Presentation/hoofdmenuView.php?voorraad=opgehaald&type=$type");  //doeactie.php?action=stuurmail");
         exit(0);
     }
