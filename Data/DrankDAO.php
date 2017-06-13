@@ -164,7 +164,7 @@ class DrankDAO {
     }  
     
     public function haalvoorraad($type){
-        console.log("haalvoorraad");
+        //console.log("haalvoorraad");
         $sql = "select voorraad from drank where type= :type";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
       
@@ -178,17 +178,38 @@ class DrankDAO {
         $dbh = null;
         
        if (!$rij) {  //niets gevonden
-           console.log("fout type");
+           //console.log("fout type");
         throw new FrisDrankException();
        } else {
-//        $lijst = array();
-//       foreach ($resultSet as $rij) {
-//            $message = new Bestelling($rij["id"], $rij["datum"],$rij["cursist"], $rij["bestelling"],$rij["prijs"]);
-//            echo $rij["bestelling"]." * " . $rij["prijs"];
-//            array_push($lijst, $message);
-//        } 
-//        print_r($lijst);
-         console.log($rij['type']) ;
+//       
+           $voorraad=$rij['voorraad'];
+           
+         return $voorraad;
         }
-}}
+}
+public function haalprijs($type){
+        //console.log("haalvoorraad");
+        $sql = "select prijs from drank where type= :type";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+      
+        //$lijst = array();
+        $stmt = $dbh->prepare($sql);
+       $stmt->execute(array(':type' => $type));
+       $rij = $stmt->fetch(PDO::FETCH_ASSOC);
+       
+       //echo print_r($resultSet);
+       //echo "totaal = ".count($resultSet);
+        $dbh = null;
+        
+       if (!$rij) {  //niets gevonden
+           //console.log("fout type");
+        throw new FrisDrankException();
+       } else {
+//       
+           $prijs=$rij['prijs'];
+           
+         return $prijs;
+        }
+}
+       }
         
